@@ -5,7 +5,7 @@ from time import sleep
 from names import rand_female_name, rand_gender, rand_male_name, rand_species
 
 
-# IDEA: Insert vet to increase health to max health.
+# IDEA: Insert vet to increase health to max health. Can vet increase stat?
 # IDEA:
 class Owner:
     def __init__(self):
@@ -54,7 +54,7 @@ if __name__ == "__main__":
 
     # Player selects which dog they want
     while True:
-        PlayerSelection = "1"  # input("{}\n[1] Select Dog [2] Change Dog\n".format(OwnerDog)) TODO: Change this backl
+        PlayerSelection = "1"  # input("{}\n[1] Select Dog [2] Change Dog\n".format(OwnerDog)) TODO: Change this back
         if PlayerSelection == '1':
             break
         elif PlayerSelection == '2':
@@ -64,13 +64,20 @@ if __name__ == "__main__":
             sleep(0.5)
 
     Day = 0
-    while True:
-        print(OwnerDog)  # TODO: Remove this later
-        print('\nName  : {}'.format(OwnerDog.name))
-        print('Health: [{0:{1:}}] {3:10} {2:}/{1:}'.format('-' * OwnerDog.temp_health, OwnerDog.health,
-                                                           OwnerDog.temp_health, ' '))
-        print('Social: [{0:{1:}}] {3:10} {2:}/{1:}'.format('-' * OwnerDog.temp_social, OwnerDog.social,
-                                                           OwnerDog.temp_social, ' '))
-        print('Hunger: [{0:{1:}}] {3:10} {2:}/{1:}'.format('-' * OwnerDog.temp_hunger, OwnerDog.hunger,
-                                                           OwnerDog.temp_hunger, ' '))
-        break
+
+
+    def print_ui():
+        health_bar = '[{0:{1:}}]'.format('-' * OwnerDog.temp_health, OwnerDog.health)
+        social_bar = '[{0:{1:}}]'.format('-' * OwnerDog.temp_social, OwnerDog.social)
+        hunger_bar = '[{0:{1:}}]'.format('-' * OwnerDog.temp_hunger, OwnerDog.hunger)
+
+        dog_name_ui = "Name    : {}".format(OwnerDog.name)
+        species_ui = "Species : {}".format(OwnerDog.species)
+        health_ui = "Health  : {0:12} {1:}/{2:}".format(health_bar, OwnerDog.temp_health, OwnerDog.health)
+        social_ui = "Social  : {0:12} {1:}/{2:}".format(social_bar, OwnerDog.temp_social, OwnerDog.social)
+        hunger_ui = "Hunger  : {0:12} {1:}/{2:}".format(hunger_bar, OwnerDog.temp_hunger, OwnerDog.hunger)
+
+        print("{}\n{}\n{}\n{}\n{}".format(dog_name_ui, species_ui, health_ui, social_ui, hunger_ui))
+
+
+    print_ui()
