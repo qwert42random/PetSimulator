@@ -1,0 +1,29 @@
+How To Play:
+Congratulations! You are now a happy owner of your very own dog, and with great power, comes great responsibility so
+you're gonna need to learn how to take care of your very own canine friend!
+
+In a single day, you are allowed 3 actions. Use up these actions wisely to keep your dog happy and fit.
+
+Needs:
+Your dog has needs which needs to be maintained. The following needs are: Health, Exercise, Social and Hunger.
+
+Health:
+Health can be maintained by taking your pet to the vet for the hefty sum of £5. Once your dog is taken to the vet, your
+dog will be as healthy as it can be with it's health fully maxed out! However, if your dog's health reaches 0, your dog
+will die!
+
+Exercise:
+Your dog needs exercise. To increase the exercise of your dog, just take your canine friend for a walk. Be weary: if
+your dog's exercise is 0, their health might take a hit the next day!
+
+Social:
+Your dogs are social creatures so they need your interaction to be happy. If your dog's social is 0, there may be a
+chance that the RSPCA may take your dog away for neglect! (However, if you have enough money, you can bribe the RSPCA to
+ leave you alone for a hefty sum of £30 which will automatically be taken from your account...)
+
+Hunger:
+Your dog needs to be fed on a daily basis. However, dog food costs £1. If your dog's hunger gets too low, their health
+might take a hit so be weary to keep their health maintained!
+
+Go to Work:
+Taking your dog to the vet and keeping them fed costs money. To earn money, you can go to work!

@@ -25,10 +25,10 @@ class Dog:
 
         # Some stats on the dog.
         self.species = rand_species()  # Species of the pet
-        self.health = randint(5, 10)  # Health of the pet (Take dog to vet to maintain).
-        self.exercise = randint(5, 10)  # Exercise of the pet (Take dog to walk to maintain).
-        self.social = randint(5, 10)  # Player will have to play with pet or there is a chance RSPCA will remove pet.
-        self.hunger = randint(5, 10)  # Dog will have to be fed to alleviate this
+        self.health = randint(5, 8)  # Health of the pet (Take dog to vet to maintain).
+        self.exercise = randint(5, 8)  # Exercise of the pet (Take dog to walk to maintain).
+        self.social = randint(5, 8)  # Player will have to play with pet or there is a chance RSPCA will remove pet.
+        self.hunger = randint(5, 8)  # Dog will have to be fed to alleviate this
 
         # Temporary stats (these are dynamic and can change)
         self.temp_hunger = self.hunger
@@ -45,6 +45,29 @@ class Dog:
             self.exercise,
             self.social,
             self.hunger)
+
+    # Decreases stat of the dog.
+    def simulate_day(self):
+        if randint(1, 2) == 1:
+            self.temp_exercise -= randint(1, 3)
+        if self.temp_exercise <= 0:
+            self.temp_exercise = 0
+            self.temp_health -= 1
+
+        if randint(1, 2) == 1:
+            self.temp_social -= randint(1, 3)
+        if self.temp_social <= 0:
+            self.temp_social = 0
+
+        self.temp_hunger -= randint(1, 3)
+        if self.temp_hunger <= 0:
+            self.temp_hunger = 0
+            self.temp_health -= 1
+
+        if randint(1, 10) == 1:
+            self.temp_health -= 1
+        if self.temp_health <= 0:
+            self.temp_health = 0
 
 
 # Prints out the dog's stats into a UI.
@@ -75,31 +98,6 @@ def print_prompt():
         OwnerDog.name))
 
 
-def simulate_day():
-    if randint(1, 2) == 1:
-        OwnerDog.temp_exercise -= randint(0, 4)
-    if OwnerDog.temp_exercise <= 0:
-        OwnerDog.temp_exercise = 0
-        OwnerDog.temp_health -= 1
-
-    if randint(1, 2) == 1:
-        OwnerDog.temp_social -= randint(1, 3)
-    if OwnerDog.temp_social <= 0:
-        OwnerDog.temp_social = 0
-
-    OwnerDog.temp_hunger -= randint(1, 3)
-    if OwnerDog.temp_hunger <= 0:
-        OwnerDog.temp_hunger = 0
-        OwnerDog.temp_health -= 1
-
-    if randint(1, 5) == 1:
-        OwnerDog.temp_health -= 1
-    if OwnerDog.temp_health <= 0:
-        OwnerDog.temp_health = 0
-
-    player_owner.energy = 3
-
-
 if __name__ == "__main__":
     print("Christopher's Dog Owner Simulator 2019")
     player_owner = Owner()
@@ -121,16 +119,18 @@ if __name__ == "__main__":
     Day = 0
     while OwnerDog.status is True:
 
-        simulate_day()
+        OwnerDog.simulate_day()
+        player_owner.energy = 3
         Day += 1
-        print("Day {}".format(Day))
-        sleep(0.5)
+        print("\nDay {}".format(Day))
+        sleep(1)
+        print_dog_stats_ui()
         if OwnerDog.temp_social == 0:
 
             # Simulates chance of dog being taken for neglect by RSPCA.
             if randint(1, 5) == 5:
                 if player_owner.money >= 30:
-                    print("You bribed the RSPCA to prevent them from taking {} for neglect!".format(OwnerDog.name))
+                    print("You bribed the RSPCA £30 to prevent them from taking {} for neglect!".format(OwnerDog.name))
                     player_owner.money -= 30
                 else:
                     print_dog_stats_ui()
@@ -144,7 +144,6 @@ if __name__ == "__main__":
             OwnerDog.status = False
 
         while player_owner.energy > 0 and OwnerDog.status is True:
-            print_dog_stats_ui()
             print_prompt()
             player_input = str(input())
 
@@ -152,42 +151,49 @@ if __name__ == "__main__":
             if player_input == '1':
                 if player_owner.money < 5:
                     print("Insufficient Funds!")
+                    sleep(0.5)
+                    print_dog_stats_ui()
                     continue
                 print("You took {} to the vet and got billed £5!!".format(OwnerDog.name))
                 sleep(0.5)
                 OwnerDog.temp_health = OwnerDog.health
                 player_owner.money -= 5
                 player_owner.energy -= 1
+                print_dog_stats_ui()
 
             # Walk
             elif player_input == '2':
                 print("You took {} for a walk!".format(OwnerDog.name))
                 sleep(0.5)
-                OwnerDog.temp_exercise += randint(1, 3)
+                OwnerDog.temp_exercise += randint(1, 2)
                 if OwnerDog.temp_exercise > OwnerDog.exercise:
                     OwnerDog.temp_exercise = OwnerDog.exercise
                 player_owner.energy -= 1
+                print_dog_stats_ui()
 
             # Play
             elif player_input == '3':
                 print("You played with {}!".format(OwnerDog.name))
                 sleep(0.5)
-                OwnerDog.temp_social += randint(1, 3)
+                OwnerDog.temp_social += randint(1, 2)
                 if OwnerDog.temp_social > OwnerDog.social:
                     OwnerDog.temp_social = OwnerDog.social
                 player_owner.energy -= 1
+                print_dog_stats_ui()
 
-            elif player_input == '4':  # Feed
+            # Feed
+            elif player_input == '4':
                 if player_owner.money < 1:
                     print("Insufficient Funds")
                     continue
-                OwnerDog.temp_hunger += randint(1, 3)
+                OwnerDog.temp_hunger += randint(1, 2)
                 if OwnerDog.temp_hunger > OwnerDog.hunger:
                     OwnerDog.temp_hunger = OwnerDog.hunger
                 player_owner.money -= 1
                 player_owner.energy -= 1
                 print('You spent £1 to feed {}!'.format(OwnerDog.name))
                 sleep(0.5)
+                print_dog_stats_ui()
 
             # Work
             elif player_input == '5':
@@ -196,8 +202,10 @@ if __name__ == "__main__":
                 player_owner.money += money_earned
                 player_owner.energy -= 1
                 sleep(0.5)
+                print_dog_stats_ui()
 
             else:
                 print("Invalid Input")
                 continue
+        sleep(0.5)
     print("You Lose!")
