@@ -1,7 +1,6 @@
 # Dog simulator
 from random import randint
 from time import sleep
-
 from names import rand_female_name, rand_gender, rand_male_name, rand_species
 
 
@@ -11,7 +10,7 @@ class Owner:
         self.money = 5
         self.energy = 3  # This determines how much an owner can do in a day.
 
-        # Stats for the end of the game.
+        # Stats for the end of the game. TODO: Change this back
         self.times_vet = 0
         self.vet_bill = 0
         self.times_walk = 0
@@ -102,28 +101,31 @@ def print_prompt():
         OwnerDog.name))
 
 
+# Prints out the endgame stat report.
 def print_endgame_report():
     print("""
-    RSPCA Owner Report #{:05}
+    RSPCA Owner Report #{0:05}
     
-    Name:         {}
-    Dog Name:     {}
-    Dog Status:   {}
-    Vet Visits:   {}   (£{})
-    Times Walked: {}
-    Times Played: {}
-    Times Fed:    {}   (£{})
-    Owner Income: £{}""".format(randint(1, 99999), player_owner.name, OwnerDog.name, OwnerDog.status,
-                                player_owner.times_vet,
-                                player_owner.vet_bill, player_owner.times_walk, player_owner.times_play,
-                                player_owner.times_fed, player_owner.food_bill, player_owner.income))
+    Name:         {1}
+    Dog Name:     {2}
+    Dog Status:   {3}
+    Vet Visits:   {4:10}{5}
+    Times Walked: {6}
+    Times Played: {7}
+    Times Fed:    {8:10}{9}
+    Owner Income: £{10}""".format(randint(1, 99999), player_owner.name, OwnerDog.name, OwnerDog.status,
+                                  str(player_owner.times_vet),
+                                  "(£" + str(player_owner.vet_bill) + ")", player_owner.times_walk,
+                                  player_owner.times_play,
+                                  str(player_owner.times_fed), '(£' + str(player_owner.food_bill) + ')',
+                                  player_owner.income))
 
 
 if __name__ == "__main__":
     print("Christopher's Dog Owner Simulator 2019")
     player_owner = Owner()
     OwnerDog = Dog()
-    player_owner.name = input(str("Enter your Name: "))
+    player_owner.name = input(str("Enter your Name: ")).capitalize()
 
     # Player selects which dog they want
     while True:
@@ -150,8 +152,8 @@ if __name__ == "__main__":
 
             # Simulates chance of dog being taken for neglect by RSPCA.
             if randint(1, 5) == 5:
-                if player_owner.money >= 30:
-                    print("\nYou bribed the RSPCA £30 to prevent them from taking {} for neglect!".format(
+                if player_owner.money >= 20:
+                    print("\nYou bribed the RSPCA £20 to prevent them from taking {} for neglect!".format(
                         OwnerDog.name))
                     player_owner.money -= 30
                 else:
@@ -167,7 +169,7 @@ if __name__ == "__main__":
 
         while player_owner.energy > 0 and OwnerDog.alive is True:
             print_prompt()
-            player_input = str(input())
+            player_input = str(input("Enter Choice: "))
 
             # Vet
             if player_input == '1':

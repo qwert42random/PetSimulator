@@ -19,7 +19,7 @@ your dog's exercise is 0, their health might take a hit the next day!
 Social:
 Your dogs are social creatures so they need your interaction to be happy. If your dog's social is 0, there may be a
 chance that the RSPCA may take your dog away for neglect! (However, if you have enough money, you can bribe the RSPCA to
- leave you alone for a hefty sum of £30 which will automatically be taken from your account...)
+ leave you alone for a hefty sum of £20 which will automatically be taken from your account...)
 
 Hunger:
 Your dog needs to be fed on a daily basis. However, dog food costs £1. If your dog's hunger gets too low, their health
