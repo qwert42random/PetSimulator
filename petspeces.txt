@@ -18,3 +18,14 @@
 "Jack Russell Terrier",
 "Dalmation",
 "Saint Bernard"
+
+
+
+1 Vet
+2 Walk
+3 Play
+4 Feed
+
+Stats
+Name: {Player Name}
+Days: {Days dog was alive}
