@@ -10,7 +10,7 @@ class Owner:
         self.money = 5
         self.energy = 3  # This determines how much an owner can do in a day.
 
-        # Stats for the end of the game. TODO: Change this back
+        # Stats for the end of the game.
         self.times_vet = 0
         self.vet_bill = 0
         self.times_walk = 0
@@ -68,7 +68,7 @@ class Dog:
             self.temp_health -= 1
 
         if randint(1, 10) == 1:
-            self.temp_health -= randint(1, 2)
+            self.temp_health -= 1
         if self.temp_health <= 0:
             self.temp_health = 0
 
@@ -107,8 +107,10 @@ def print_endgame_report():
     RSPCA Owner Report #{0:05}
     
     Name:         {1}
-    Dog Name:     {2}
+    Dog Name:     {2:10}({12})
+    Dog Species:  {13}
     Dog Status:   {3}
+    Days Lived:   {11}
     Vet Visits:   {4:10}{5}
     Times Walked: {6}
     Times Played: {7}
@@ -118,14 +120,16 @@ def print_endgame_report():
                                   "(£" + str(player_owner.vet_bill) + ")", player_owner.times_walk,
                                   player_owner.times_play,
                                   str(player_owner.times_fed), '(£' + str(player_owner.food_bill) + ')',
-                                  player_owner.income))
+                                  player_owner.income, Day, OwnerDog.gender, OwnerDog.species))
 
 
 if __name__ == "__main__":
-    print("Christopher's Dog Owner Simulator 2019")
+    print("Christopher's Dog Owner Simulator 2019\nNow with over 50 Breeds of Dogs!\nDisclaimer: No dogs were harmed "
+          "in the "
+          "making of this game")
     player_owner = Owner()
     OwnerDog = Dog()
-    player_owner.name = input(str("Enter your Name: ")).capitalize()
+    player_owner.name = input(str("\nEnter your Name: ")).capitalize()
 
     # Player selects which dog they want
     while True:

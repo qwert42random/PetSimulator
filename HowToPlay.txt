@@ -1,3 +1,5 @@
+To start the game, just run main.py with all the files in the same folder.
+
 How To Play:
 Congratulations! You are now a happy owner of your very own dog, and with great power, comes great responsibility so
 you're gonna need to learn how to take care of your very own canine friend!
